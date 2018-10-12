@@ -12,33 +12,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.renren.modules.sys.entity.SysRoleEntity;
-import io.renren.modules.sys.service.SysRoleService;
+import io.renren.modules.sys.entity.GoodsEntity;
+import io.renren.modules.sys.service.GoodsService;
 import io.renren.common.utils.PageUtils;
 import io.renren.common.utils.R;
 
 
 
 /**
- * 角色
+ * 商品管理
  *
  * @author chenshun
  * @email sunlightcs@gmail.com
- * @date 2018-10-12 10:43:55
+ * @date 2018-10-12 11:05:23
  */
 @RestController
-@RequestMapping("sys/sysrole")
-public class SysRoleController {
+@RequestMapping("sys/goods")
+public class GoodsController {
     @Autowired
-    private SysRoleService sysRoleService;
+    private GoodsService goodsService;
 
     /**
      * 列表
      */
     @RequestMapping("/list")
-    @RequiresPermissions("sys:sysrole:list")
+    @RequiresPermissions("sys:goods:list")
     public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = sysRoleService.queryPage(params);
+        PageUtils page = goodsService.queryPage(params);
 
         return R.ok().put("page", page);
     }
@@ -47,21 +47,21 @@ public class SysRoleController {
     /**
      * 信息
      */
-    @RequestMapping("/info/{roleId}")
-    @RequiresPermissions("sys:sysrole:info")
-    public R info(@PathVariable("roleId") Long roleId){
-        SysRoleEntity sysRole = sysRoleService.selectById(roleId);
+    @RequestMapping("/info/{goodsId}")
+    @RequiresPermissions("sys:goods:info")
+    public R info(@PathVariable("goodsId") Long goodsId){
+        GoodsEntity goods = goodsService.selectById(goodsId);
 
-        return R.ok().put("sysRole", sysRole);
+        return R.ok().put("goods", goods);
     }
 
     /**
      * 保存
      */
     @RequestMapping("/save")
-    @RequiresPermissions("sys:sysrole:save")
-    public R save(@RequestBody SysRoleEntity sysRole){
-        sysRoleService.insert(sysRole);
+    @RequiresPermissions("sys:goods:save")
+    public R save(@RequestBody GoodsEntity goods){
+        goodsService.insert(goods);
 
         return R.ok();
     }
@@ -70,10 +70,10 @@ public class SysRoleController {
      * 修改
      */
     @RequestMapping("/update")
-    @RequiresPermissions("sys:sysrole:update")
-    public R update(@RequestBody SysRoleEntity sysRole){
-        ValidatorUtils.validateEntity(sysRole);
-        sysRoleService.updateAllColumnById(sysRole);//全部更新
+    @RequiresPermissions("sys:goods:update")
+    public R update(@RequestBody GoodsEntity goods){
+        ValidatorUtils.validateEntity(goods);
+        goodsService.updateAllColumnById(goods);//全部更新
         
         return R.ok();
     }
@@ -82,9 +82,9 @@ public class SysRoleController {
      * 删除
      */
     @RequestMapping("/delete")
-    @RequiresPermissions("sys:sysrole:delete")
-    public R delete(@RequestBody Long[] roleIds){
-        sysRoleService.deleteBatchIds(Arrays.asList(roleIds));
+    @RequiresPermissions("sys:goods:delete")
+    public R delete(@RequestBody Long[] goodsIds){
+        goodsService.deleteBatchIds(Arrays.asList(goodsIds));
 
         return R.ok();
     }

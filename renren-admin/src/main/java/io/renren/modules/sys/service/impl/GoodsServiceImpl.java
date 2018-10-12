@@ -8,19 +8,19 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import io.renren.common.utils.PageUtils;
 import io.renren.common.utils.Query;
 
-import io.renren.modules.sys.dao.SysRoleDao;
-import io.renren.modules.sys.entity.SysRoleEntity;
-import io.renren.modules.sys.service.SysRoleService;
+import io.renren.modules.sys.dao.GoodsDao;
+import io.renren.modules.sys.entity.GoodsEntity;
+import io.renren.modules.sys.service.GoodsService;
 
 
-@Service("sysRoleService")
-public class SysRoleServiceImpl extends ServiceImpl<SysRoleDao, SysRoleEntity> implements SysRoleService {
+@Service("goodsService")
+public class GoodsServiceImpl extends ServiceImpl<GoodsDao, GoodsEntity> implements GoodsService {
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
-        Page<SysRoleEntity> page = this.selectPage(
-                new Query<SysRoleEntity>(params).getPage(),
-                new EntityWrapper<SysRoleEntity>()
+        Page<GoodsEntity> page = this.selectPage(
+                new Query<GoodsEntity>(params).getPage(),
+                new EntityWrapper<GoodsEntity>()
         );
 
         return new PageUtils(page);
